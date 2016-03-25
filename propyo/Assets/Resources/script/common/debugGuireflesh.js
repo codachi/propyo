@@ -1,15 +1,16 @@
 ﻿#pragma strict
 
 
-static var reguiExt = function(num,contentAr:Array){//デバッグテキストの更新
-var ob:GUIText = (contentAr[4] as GameObject).transform.Find("debugText(Clone)").gameObject.GetComponent.<GUIText>();//オブジェクトから子を取り出し
+// デバッグテキストの更新
+static var reguiExt = function(sum, contentAr:Array){
+    // オブジェクトから子を取り出し
+    var go:GameObject = contentAr[4] as GameObject
+    var ob:GUIText = go.transform.Find("debugText(Clone)").gameObject.GetComponent.<GUIText>();
 
-var sumtxt = num.ToString();//合体地
+    // 合体値
+    var sumtxt = sum.ToString();
 
-
-//print("テキスト" + sumtxt);
-
-//print("オブ" + ob);
-ob.text = sumtxt;
-
+    // print("テキスト" + sumtxt);
+    // print("オブ" + ob);
+    ob.text = sumtxt;
 };

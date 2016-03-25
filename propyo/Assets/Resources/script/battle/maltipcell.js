@@ -108,20 +108,12 @@ static var oneceMixFlg:boolean;//一回合体したかどうか
 //
 //};
 
-
-
-static var multip = function(now:int,future:int){//合体
-			if(now == future){//数字が同じなら
-			var newMixNum:int =  now * 2;//数値だけ合体　//おぶじぇくとはそのままで、移動時に削除
-			//print("同じだよ");
-			return newMixNum;//合体値を返す
-			}
-			else if(now != future){//違ったら
-			//print("同じじゃないよ");
-			return null;
-			}
-			
-
-
-
+// 合体
+static var multip = function(now:int, future:int) {
+    if (now == future) {
+        // 数値だけ合体
+        // おぶじぇくとはそのままで、移動時に削除
+        return now * 2;  // 合体値を返す
+    }
+    return null;
 };

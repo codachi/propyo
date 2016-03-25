@@ -2,14 +2,12 @@
 
 
 function Awake () {
-
-
 }
 
 function Update () {
-
-	var Pos:Vector3 = this.transform.parent.gameObject.transform.position;//親をしてい
-	var viewportPoint:Vector3 = Camera.main.WorldToViewportPoint(Pos);//GUItextのポジションを変換
-	this.transform.position = viewportPoint;
-
+    // 親を指定
+    var Pos:Vector3 = this.transform.parent.gameObject.transform.position;
+    // GUItextのポジションを変換
+    var viewportPoint:Vector3 = Camera.main.WorldToViewportPoint(Pos);
+    this.transform.position = viewportPoint;
 }
