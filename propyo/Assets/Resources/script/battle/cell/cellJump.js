@@ -33,7 +33,7 @@ function OnCollisionEnter2D(col:Collision2D) {
 
 function jump() {
     // print("ジャンプ");
-    var vector : Vector3 = Vector3.up * 200
+    var vector : Vector3 = Vector3.up * 200;
     if (forOrBackFlg) {
         vector += Vector3.left * 50;
     } else {

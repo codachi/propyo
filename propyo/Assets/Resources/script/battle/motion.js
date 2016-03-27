@@ -10,7 +10,7 @@
 static var attackAn = function(futX, futY) {
     var futureAr:Array = (grid.tileListAr[futX] as Array) [futY];
     var futureArinfo:Array = futureAr[6];
-    var transform:Transform = (futureArinfo[0] as GameObject).transform
+    var transform:Transform = (futureArinfo[0] as GameObject).transform;
 
     var distance:Vector3 = Vector3.Normalize(bossJamp.bossPos - transform.position);
     transform.GetComponent.<Rigidbody2D>().AddForce(distance.up * 200 + distance.right * 200);
@@ -91,7 +91,7 @@ static var gravityCont = function() {
     for (var x:int = 0; x < grid.grdMaxNumX; x++) {
         for (var y:int = 0; y < grid.grdMaxNumY; y++) {
             var tgAr:Array = (grid.tileListAr[x] as Array)[y];
-            var game_object:GameObject = tgAr[4] as GameObject
+            var game_object:GameObject = tgAr[4] as GameObject;
             game_object.GetComponent(Rigidbody2D).isKinematic = false;  // 重力ON
         }
     }

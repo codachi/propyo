@@ -22,7 +22,7 @@ static var addcomb = function() {
 
 
 // スコアの更新
-static var addscore = function(point:int, x, y) {
+static var addscore = function(point:int, x:int, y:int) {
     // print("コンボ数" + comboNum);
     // print("コンボバイリツ" + addcomb());
 
@@ -31,7 +31,7 @@ static var addscore = function(point:int, x, y) {
 
     // tokuten you
     var efPoint:int = s; 
-    var futureGridinfo:Array = (grid.tileListAr[x] as Array)[y];  // 移動先
+    var futureGridinfo:Array = (grid.tileListAr[x] as Array)[y] as Array;
     futureGridinfo[8] = efPoint;
 
     score = s;

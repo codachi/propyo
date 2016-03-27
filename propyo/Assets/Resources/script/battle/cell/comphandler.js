@@ -15,7 +15,7 @@ function comphandler (refAr: Array) {
     // print("中身" + refAr[3]);
     if (refAr[3] != null) {
         print("ぬるじゃない");
-        var meth:Function = refAr[3];
+        var meth:Function = refAr[3] as Function;
         meth(this.gameObject);
     }
 }
