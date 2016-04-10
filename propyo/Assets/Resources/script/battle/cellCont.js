@@ -17,31 +17,19 @@ static var motionfirstCheck = true;
 
 
 static var cellcont = function() {
-    // movetgAr.Clear();//初期化
-    // movePointAr.Clear();
-    // print("moveはじめ");
-    // var testcount = 0;
     // // Pcomm.cellObAr
     // // [0] GameObject
     // // [1] X
     // // [2] Y
     // // [3] gameNum
     // // [4] pos
-    // print("オブジェクト" + Pcomm.cellObAr[0]);
-    // print("グリッドリスト" + grid.tileListAr);
 
-    // フリックチェックして
-    // ふりっク方向によって舐める方向変えて
+    // フリック方向によって舐める方向変える
     // もし列が一杯だったら其の列をスキップして
     // 合体後のセルのチェックして移動後に削除
-    var lineAr:Array;  // XorY軸ラインのチェック配列が代入される
-    var flickCheck = diffPass.NSEW();
-    switch (flickCheck) {
-        case 0: case 1: lineAr = check.yLineCheckAr; break;  // 上下ならY
-        case 2: case 3: lineAr = check.xLineCheckAr; break;  // 左右ならX
-    }
 
     // フリック方向があれば
+    var flickCheck = diffPass.NSEW();
     if (flickCheck != null) {
         // フリック方向によって舐める方向を変える
         switch (flickCheck) {
@@ -63,7 +51,6 @@ static var overLeft = function() {
                 contrall(x, y);
             }
         }
-        refleshFmoveFlag();  // 一回でも動いたかフラグ初期化
         
         // print("ノットマッチ"  + notMuchcheckCount);
         if (notMuchcheckCount >= grid.gridAllNum) {
@@ -99,7 +86,6 @@ static var underRight = function() {
                 contrall(x, y);
             }
         }
-        refleshFmoveFlag();  // 一回でも動いたかフラグ初期化
 
         // print("ノットマッチ"  + notMuchcheckCount);
         if (notMuchcheckCount >= grid.gridAllNum) {
@@ -125,13 +111,11 @@ static var underRight = function() {
 
 // 左右共通処理
 static var bothclear = function() {
-    // print("ここは？");
     countFirstflg = true;           // 初回で
     notMuchcheckCount = 0;          // 初期化
     refleshSumFlag();               // 一度合体したかどうかのフラグを初期化
     notMuchcheckCountFlg = false;   // 初期化
     para.comboNum = 0;              // コンボカウント初期化
-    // print("コンボカウント初期化");
 };
 
 
@@ -148,18 +132,6 @@ static var refleshSumFlag = function() {
             gridinfo[8] = null;     //  point
         }
     }
-    // check.checkmate();  // セルが一杯かどうか
-};
-
-
-// 一度でも移動したかどうかのフラグ
-static var refleshFmoveFlag = function() {
-    // for (var x:int = 0; x < grid.grdMaxNumX; x++) {
-    //     for (var y:int = 0; y < grid.grdMaxNumY; y++) {
-    //         var gridinfo:Array = (grid.tileListAr[x] as Array)[y];
-    //         // gridinfo[7] = false;  // 一度移動しましたよフラグ初期化！
-    //     }
-    // }
 };
 
 
@@ -257,12 +229,8 @@ static var contrall = function(x, y) {
 
 // 移動先へのオブジェクトの代入
 static var rePlaceCell = function(x:int, y:int, Fx:int, Fy:int) {
-    // print("きてる？");
     var nowGridinfo:Array = (grid.tileListAr[x] as Array)[y];       // 現在位置
     var futureGridinfo:Array = (grid.tileListAr[Fx] as Array)[Fy];  // 移動先
-
-    // pos,object アニメーション
-    // motion.cellwallk(futureGridinfo[1], nowGridinfo[4], false);
 
     futureGridinfo[2] = true;            // 移動先フラグ更新
     futureGridinfo[3] = nowGridinfo[3];  // 合体値の更新
@@ -314,55 +282,3 @@ static var moveCell = function() {
     }
 };
 
-
-/*
-static var trueOnlyFirstTime = function() {//最初の一度だけtreuを返して　あとはfalse を返す
-var check = (function():boolean {
-    if (motionfirstCheck) {
-      motionfirstCheck = false;
-      return true;
-    }
-    return false;
-  })();
-  
-    return check;
-};
-
-
-
-/*
-
-移動列が全部埋まってたら　うごけない
-
-
-もしくは移動列の数が　MAX-1（今回４子）　で　全部つながっており　なおかつフリック方向側に空きがなければNG　　（MAX-1で　どっちか橋があいてルパターン）
-逆にMAX-1　でつながってても　フリック方向に空きがあればOK
-MAX-1　でも　まン中に空きがある場合は　OK（MAX-1で　両端が埋まってるパターン）
-
-
-上記の条件を確認した後
-自分の隣にセルがあれば　移動不可　　なければ可能の条件の元
-
-一旦オブジェクトの配列側に、移動先のグリッド情報を格納
-
-
-完了したら
-オブジェクト側のグリッド情報を元に、　グリッド管理している配列のtrue falseを更新
-
-
-ここまでが移動処理
-
-
-その前に合体処理を入れた方がいいかも
-
-合体処理
-↓
-移動の順番
-
-
-
-自分のグリッドの確認
-行きたい方向にいるかどうか
-又、行きたい方向のやつがこれからうごくかどうか
-行きたい方向のやつがいたら、そいつが自分と同じかどうか
-*/
