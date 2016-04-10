@@ -33,10 +33,6 @@ function OnCollisionEnter2D(col:Collision2D) {
     if (grounded == true) {
         jump();
     }
-    // if (col.gameObject.name != "floa") {
-    //     // ぶつかったら切ってみる
-    //     rigidbody2D.isKinematic = true;
-    // }
 }
 
 
@@ -50,16 +46,3 @@ function jump() {
 function tgob(param) {
 }
 
-
-// function poscont() {
-//     if(bossPos.x > 2) {
-//         iTween.MoveTo(this.gameObject, {
-//             "time": 0.3,
-//             "x": 1.928791,
-//             "easetype": iTween.EaseType.easeOutBounce,
-//             "onComplete": 'comphandler',
-//             "onCompletetarget": this.gameObject,
-//             "oncompleteparams": 'param'
-//         });
-//     }
-// }
