@@ -8,116 +8,59 @@ static var dellObAr:Array = new Array();  // 削除用アレー
 static var Ar:Array;                      // オブジェクト
 static var ArX:int;
 static var ArY:int;
-static var notMuchcheckCount = 0;         // 隣が同じじゃなかった時の繰り返しカウント
-static var notMuchcheckCountFlg:boolean;  // 隣が同じじゃなかった時の繰り返しカウント
 static var countFirstflg:boolean;         // オブジェクトが何も動けなかったらture
 static var tweenCompflag:boolean;
 static var FirstFlg;                      // モーション用の最初の配列格納用
-static var motionfirstCheck = true;
 
 
 static var cellcont = function() {
-    // // Pcomm.cellObAr
-    // // [0] GameObject
-    // // [1] X
-    // // [2] Y
-    // // [3] gameNum
-    // // [4] pos
-
     // フリック方向によって舐める方向変える
     // もし列が一杯だったら其の列をスキップして
     // 合体後のセルのチェックして移動後に削除
+    var flick_direction = diffPass.NSEW();
+    if (flick_direction == null) {
+        // フリック方向がなければ抜ける
+       return;
+    }
 
-    // フリック方向があれば
-    var flickCheck = diffPass.NSEW();
-    if (flickCheck != null) {
+    var firstCount:int = 0;
+    while (true) {
+        var x:int;
+        var y:int;
+        var moved_count:int = 0;
+
         // フリック方向によって舐める方向を変える
-        switch (flickCheck) {
-            case 0: case 2: underRight(); break;
-            case 1: case 3: overLeft(); break;
-        }
-    }
-};
-
-
-// 上左フリックの場合の読み
-static var overLeft = function() {
-    var firstCount = 0;
-    motionfirstCheck = true;
-
-    while (notMuchcheckCountFlg == false) {
-        for (var y:int = 0; y < grid.grdMaxNumY; y++) {
-            for (var x:int = 0; x < grid.grdMaxNumX; x++) {
-                contrall(x, y);
+        if (flick_direction == 1 || flick_direction == 3) {
+            // over left
+            for (y = 0; y < grid.grdMaxNumY; y++) {
+                for (x = 0; x < grid.grdMaxNumX; x++) {
+                    moved_count += moveTick(x, y);
+                }
+            }
+        } else {
+            // under right
+            for (x = grid.grdMaxNumX - 1; x >= 0; x--) {
+                for (y = grid.grdMaxNumY - 1; y >= 0; y--) {
+                    moved_count += moveTick(x, y);
+                }
             }
         }
-        
-        // print("ノットマッチ"  + notMuchcheckCount);
-        if (notMuchcheckCount >= grid.gridAllNum) {
-            // 何も移動しなかったら（カウントがセル分）
-            notMuchcheckCountFlg = true;
+        // 何も移動しなかったら（カウントがセル分）
+        if (moved_count == 0) {
+            // 一度も何も移動しなかったら
             if (firstCount == 0) {
-                // 一度も何も移動しなかったら
-                bothclear();     // 共通処理
-                firstCount = 0;  // 初期化
-                return;          // 終わり
+                countFirstflg = true;           // 初回で
+                para.comboNum = 0;              // コンボカウント初期化
+                refleshSumFlag();               // 一度合体したかどうかのフラグを初期化
+                return;
             }
+            break;
         }
-        firstCount += 1;        // カウント
-        notMuchcheckCount = 0;  // 初期化
+        firstCount += 1;
     }
-    // print("抜けました");
-
-    notMuchcheckCountFlg = false;   // 初期化
     moveCell();                     // 描画移動
     refleshSumFlag();               // 一度合体したかどうかのフラグを初期化
 };
-
-
-// TODO(takishita): overLeft()との共通化
-// 下右フリックの場合の読み
-static var underRight = function() {
-    var firstCount = 0;
-    motionfirstCheck = true;
-
-    while (notMuchcheckCountFlg == false) {
-        for (var x:int = (grid.grdMaxNumX - 1); x >= 0; x--) {
-            for (var y:int = (grid.grdMaxNumY - 1); y >= 0; y--) {
-                contrall(x, y);
-            }
-        }
-
-        // print("ノットマッチ"  + notMuchcheckCount);
-        if (notMuchcheckCount >= grid.gridAllNum) {
-            // 何も移動しなかったら（カウントがセル分）
-            notMuchcheckCountFlg = true;
-            if (firstCount == 0) {
-                // 一度も何も移動しなかったら
-                bothclear();     // 共通処理
-                firstCount = 0;  // 初期化
-                return;          // 終わり
-            }
-        }
-        firstCount += 1;        // カウント
-        notMuchcheckCount = 0;  // 初期化
-    }
-    // print("抜けました");
-
-    notMuchcheckCountFlg = false;   // 初期化
-    moveCell();                     // 描画移動
-    refleshSumFlag();               // 一度合体したかどうかのフラグを初期化
-};
-
-
-// 左右共通処理
-static var bothclear = function() {
-    countFirstflg = true;           // 初回で
-    notMuchcheckCount = 0;          // 初期化
-    refleshSumFlag();               // 一度合体したかどうかのフラグを初期化
-    notMuchcheckCountFlg = false;   // 初期化
-    para.comboNum = 0;              // コンボカウント初期化
-};
-
 
 // 一旦合体したかどうかのパラメータとかの初期化
 static var refleshSumFlag = function() {
@@ -135,7 +78,7 @@ static var refleshSumFlag = function() {
 };
 
 
-static var contrall = function(x, y) {
+static var moveTick = function(x, y) : int {
     // フリック上下左右判定して方向と移動数数を返す
     var arrNum:Array = check.oneOr();
     // X Y フリック方向 移動数値
@@ -158,14 +101,12 @@ static var contrall = function(x, y) {
 
     if (nowGridinfo[2] == false) {
         // 自分がイなかったら
-        notMuchcheckCount += 1;
-        return;
+        return 0;
     }
     // print("今の位置" + x + y);
     if (moveTgCelInfoAr == null) {
         // 自分がいたらが行き止まりだった（端だとnullになる）
-        notMuchcheckCount += 1;
-        return;
+        return 0;
     }
     // 端じゃなかったら
     var tempAr:Array = moveTgCelInfoAr;
@@ -177,20 +118,18 @@ static var contrall = function(x, y) {
         rePlaceCell(x, y, tempAr[0], tempAr[1]);
         // print("移動元情報" + nowGridinfo);
         // print("移動先情報" + futureGridinfo);
-        return;
+        return 1;
     }
     if (futureGridinfo[5] == true) {
         // 移動先にいて、合体していたら
-        notMuchcheckCount += 1;
-        return;
+        return 0;
     }
     // 移動先が合体してなかったら合体を試みる
     // 今の座標と移動量 合体値が帰ってクルだけ
     var MixNum = maltipcell.multip(nowGridinfo[3], futureGridinfo[3]);
     if (MixNum == null) {
         // 数値が一致して無かったら
-        notMuchcheckCount += 1; 
-        return;
+        return 0;
     }
     // 数字が一致してたら合体開始
     // print("合算値" + MixNum);
@@ -224,6 +163,8 @@ static var contrall = function(x, y) {
     // デバッグ用
     debugGuireflesh.reguiExt(MixNum,futureGridinfo);  // デバッグ用
     // デバッグ用
+
+    return 1;
 };
 
 

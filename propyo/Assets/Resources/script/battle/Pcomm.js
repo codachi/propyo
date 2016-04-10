@@ -7,7 +7,6 @@ static var AdCueobject:GameObject;  // キュー追加用オブジェクト
 static var cellgroup:GameObject;    // セルの親オブジェクト
 static var btgroup:GameObject;      // バトルセルセルの親オブジェクト
 
-static var cellObAr:Array = new Array();  // 全てのセルのオブジェクト{x,y}が入った配列
 static var cellSpriteHs:Object[];         // セルのスプライト画像配列
 
 
