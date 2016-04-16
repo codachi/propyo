@@ -18,10 +18,10 @@ static var FFindOb = function() {
     btgroup     = GameObject.Find("Btgroup");    //バトルcellの親
 
     // スプライトを一度に格納
-    cellSpriteHs = Resources.LoadAll("sprite/poyo",typeof(Sprite));
+    cellSpriteHs = Resources.LoadAll("Sprite/poyo",typeof(Sprite));
 
-    para.scoretext = Instantiate(Resources.Load("prehab/score", GUIText));
-    para.bestScoretxt = Instantiate(Resources.Load("prehab/Hiscore", GUIText));
+    para.scoretext = Instantiate(Resources.Load("Prefab/score", GUIText));
+    para.bestScoretxt = Instantiate(Resources.Load("Prefab/Hiscore", GUIText));
     para.drawscore();
 };
 

@@ -45,12 +45,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Resources\script\Boss.cs" />
-     <Compile Include="Assets\Resources\script\common\RubberEffect.cs" />
-     <Compile Include="Assets\iTween\Sample\MoveSample.cs" />
-     <Compile Include="Assets\iTween\Sample\RotateSample.cs" />
-     <Compile Include="Assets\iTween\Sample\SampleInfo.cs" />
-     <None Include="Assets\iTween\ReadMe!\ReadMe!.txt" />
+     <Compile Include="Assets\Resources\Script\Boss.cs" />
+     <Compile Include="Assets\Resources\Script\common\RubberEffect.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

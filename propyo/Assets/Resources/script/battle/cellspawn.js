@@ -42,13 +42,13 @@ static var cellSpawn = function(){
     var sumNum = Random.Range(0, 2); // 0か1を抽選
     if (sumNum == 0) {
         gameNum = 2;  // 合体用初期値
-        cellOb = Instantiate(Resources.Load("prehab/poyo", GameObject));
-        btcellOb = Instantiate(Resources.Load("prehab/poyo", GameObject));  
+        cellOb = Instantiate(Resources.Load("Prefab/poyo", GameObject));
+        btcellOb = Instantiate(Resources.Load("Prefab/poyo", GameObject));  
     }
     else {
         gameNum = 4;  // 合体用初期値
-        cellOb = Instantiate(Resources.Load("prehab/poyo4", GameObject));
-        btcellOb = Instantiate(Resources.Load("prehab/poyo4", GameObject)); 
+        cellOb = Instantiate(Resources.Load("Prefab/poyo4", GameObject));
+        btcellOb = Instantiate(Resources.Load("Prefab/poyo4", GameObject)); 
     }
     cellOb.name = (tgCellAr[0]).ToString();
     cellOb.transform.parent = Pcomm.cellgroup.transform;
@@ -72,7 +72,7 @@ static var cellSpawn = function(){
     // print("状態" + grid.tileListAr);
 
     // デバッグ
-    var text:GUIText = Instantiate(Resources.Load("prehab/debugText", GUIText));
+    var text:GUIText = Instantiate(Resources.Load("Prefab/debugText", GUIText));
     text.transform.parent = cellOb.transform.transform;  // 親子
     debugGuireflesh.reguiExt(gameNum,tgCellAr);          // デバッグ用　てきすと描画
     // GUItextのポジションを変換

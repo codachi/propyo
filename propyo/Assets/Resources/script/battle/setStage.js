@@ -4,5 +4,5 @@ static var boss:GameObject;
 
 
 static var setBoss = function() {
-    boss = Instantiate(Resources.Load("prehab/boss", GameObject));
+    boss = Instantiate(Resources.Load("Prefab/boss", GameObject));
 };
