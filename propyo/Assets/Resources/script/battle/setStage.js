@@ -1,8 +1,8 @@
 ﻿#pragma strict
 
-static var BossOb:GameObject;
+static var boss:GameObject;
 
 
 static var setBoss = function() {
-    BossOb = Instantiate(Resources.Load("prehab/boss", GameObject));
+    boss = Instantiate(Resources.Load("prehab/boss", GameObject));
 };

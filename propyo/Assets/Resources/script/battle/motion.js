@@ -12,7 +12,8 @@ static var attackAn = function(futX, futY) {
     var futureArinfo:Array = futureAr[6];
     var transform:Transform = (futureArinfo[0] as GameObject).transform;
 
-    var distance:Vector3 = Vector3.Normalize(bossJamp.bossPos - transform.position);
+    var boss_position:Vector3 = setStage.boss.gameObject.transform.position;
+    var distance:Vector3 = Vector3.Normalize(boss_position - transform.position);
     transform.GetComponent.<Rigidbody2D>().AddForce(distance.up * 200 + distance.right * 200);
 
     // print("なにこ" + futureArinfo[0]);
@@ -51,7 +52,7 @@ static var cellwallk = function(pos:Vector3, tgob:GameObject, flag, refAr:Array)
         "onCompletetarget": tgob,
         "oncompleteparams": refAr
     });
-}; 
+};
 
 
 // 合体した時一瞬大きくなるアニメーション
