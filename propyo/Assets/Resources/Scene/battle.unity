@@ -389,8 +389,8 @@ GameObject:
   - 212: {fileID: 1917371082}
   - 61: {fileID: 1917371081}
   m_Layer: 8
-  m_Name: floa
-  m_TagString: Untagged
+  m_Name: Floor
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
