@@ -62,7 +62,8 @@ static var cellBig = function (tgob:GameObject, refAr:Array) {
     // [2]Flg   // 合体したよのフラグ
     print("セルビッグまできた" + refAr[2] + tgob);
 
-    if (refAr[2]) {
+    // TODO(peketora): refAr[1] のチェックが必要になったので C# 移植時に直す
+    if (refAr[1] && refAr[2]) {
         var pos:Vector3 = refAr[1].transform.position;
         imgChange.relodeImg(refAr[1], refAr[0]);
 
